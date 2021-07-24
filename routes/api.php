@@ -14,5 +14,5 @@ use App\Http\Controllers\JobCategoryController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get("job-categories",[JobCategoryController::class,"index"]);
 Route::post("job-categories",[JobCategoryController::class,"store"]);

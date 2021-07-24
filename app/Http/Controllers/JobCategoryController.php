@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class JobCategoryController extends Controller
 {
+    public function index(){
+        $jobCategories = JobCategory::all();
+        return response()->json([
+            "status"=>true,
+            "message"=>"OK.",
+            "data"=> $jobCategories
+        ],200);
+
+    }
     public function store(Request $req){
 
     $req->validate([

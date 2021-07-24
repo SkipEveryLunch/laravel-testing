@@ -62,4 +62,28 @@ class JobCategoryTest extends TestCase
             ]
         ])->assertStatus(422);
     }
+    public function test_getJobCategories_success_jobCategoriesRetrieved():void{
+        $jc1 = JobCategory::factory()->create();
+        $jc2 = JobCategory::factory()->create();
+        $headers  = [
+            "Accept"=>"application/json"
+        ];
+        $res = $this->get("/api/job-categories",$headers);
+        $res->assertJson([
+            "status"=>true,
+            "message"=>"OK.",
+            "data"=>[
+                [
+                    "id"=>$jc1->id,
+                    "title"=>$jc1->title,
+                    "user_id"=>$jc1->user_id,
+                ],
+                [
+                    "id"=>$jc2->id,
+                    "title"=>$jc2->title,
+                    "user_id"=>$jc2->user_id,
+                ]
+            ]
+        ]);
+    }
 }

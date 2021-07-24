@@ -42,4 +42,24 @@ class JobCategoryTest extends TestCase
         JobCategory::factory(10)->create();
         $this->assertDatabaseCount("job_categories",11);
     }
+    public function test_checkRequiredFields_failure_validationErrorReturned():void{
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+        $payload  = [
+        ];
+        $headers  = [
+            "Accept"=>"application/json"
+        ];
+        $res = $this->post("/api/job-categories",$payload,$headers);
+        $res->assertJson([
+            "status"=>false,
+            "message"=>"Validation failed",
+            "data"=>null,
+            "error"=>[
+                "title"=>[
+                    "The title field is required."
+                ]
+            ]
+        ])->assertStatus(422);
+    }
 }

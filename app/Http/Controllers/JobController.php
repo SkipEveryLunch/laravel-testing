@@ -24,4 +24,28 @@ class JobController extends Controller
                 "data"=>$job
             ]);
     }
+    public function update(Request $req,$id){
+        $job = Job::find($id);
+        if(!$job){
+            return response()->json([
+                "status"=>false,
+                "message"=>"no such job posted by you",
+                "data"=>null
+            ],404);
+        }
+        $job->update(
+            $req->only(
+                "title",
+                "description",
+                "location",
+                "requirement",
+                "job_category_id"
+            )
+        );
+        return response()->json([
+                "status"=>true,
+                "message"=>"Job updated",
+                "data"=>$job
+            ]);
+    }
 }

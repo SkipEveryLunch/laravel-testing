@@ -18,3 +18,4 @@ use App\Http\Controllers\JobController;
 Route::get("job-categories",[JobCategoryController::class,"index"]);
 Route::post("job-categories",[JobCategoryController::class,"store"]);
 Route::post("jobs",[JobController::class,"store"]);
+Route::put("jobs/{id}",[JobController::class,"update"]);

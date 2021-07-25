@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobCategoryController;
+use App\Http\Controllers\JobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,4 @@ use App\Http\Controllers\JobCategoryController;
 */
 Route::get("job-categories",[JobCategoryController::class,"index"]);
 Route::post("job-categories",[JobCategoryController::class,"store"]);
+Route::post("jobs",[JobController::class,"store"]);

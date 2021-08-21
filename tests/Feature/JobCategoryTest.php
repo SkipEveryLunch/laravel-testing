@@ -17,6 +17,13 @@ class JobCategoryTest extends TestCase
      *
      * @return void
      */
+    public function test_jobCategory_belongs_to_user():void{
+        $user = User::factory()->create();
+        $jc = JobCategory::factory()->create([
+            "user_id" => $user->id
+        ]);
+        $this->assertNotEmpty($jc->user);
+    }
     public function test_createCategory_success_categoryCreated():void{
         $this->withoutExceptionHandling();
         $user = User::factory()->create();
@@ -33,7 +40,6 @@ class JobCategoryTest extends TestCase
             "status"=>201,
             "message"=>"Job Category Created",
             "data"=>[
-                "id" => 1,
                 "title"=>$title,
                 "user_id"=>$user->id
             ] 
